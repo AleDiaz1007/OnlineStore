@@ -30,18 +30,21 @@ namespace OnlineStore.Controllers
             return result;
         }
 
+        // Endpoint to update a category
         [HttpPut("/updateCategory/{id}")]
         public ActionResult<Category> updateCategory(int id, Category category)
         {
             return _service.updateCategory(id, category);
         }
 
+        // Endpoint to create a category
         [HttpPost("/createCategory")]
         public ActionResult<Category> createCategory(Category category)
         {
             return _service.createCategory(category);
         }
 
+        // Endpoint to delete a category
         [HttpDelete("/deleteCategory/{id}")]
         public ActionResult<Category> deleteCategory(int id)
         {
