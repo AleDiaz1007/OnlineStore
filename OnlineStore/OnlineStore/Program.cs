@@ -22,6 +22,10 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+
+builder.Services.AddScoped<IUsersService, UsersService>();
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
