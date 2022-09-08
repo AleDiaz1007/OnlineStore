@@ -14,7 +14,7 @@ namespace OnlineStore.DAL.Models
 
         public string Password { get; set; }
 
-        public string IdRole { get; set; }
+        public int IdRole { get; set; }
 
     }
 }
