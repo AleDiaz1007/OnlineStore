@@ -13,7 +13,7 @@ namespace OnlineStore.BLL.Contracts
 
         public ActionResult<IEnumerable<Category>> getCategories();
 
-        public Category getOneCategory(int id);
+        public ActionResult<Category> getOneCategory(int id);
 
         public ActionResult<Category> updateCategory(int id, Category category);
 

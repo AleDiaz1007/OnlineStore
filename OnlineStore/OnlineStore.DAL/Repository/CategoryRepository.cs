@@ -38,7 +38,7 @@ namespace OnlineStore.DAL.Repository
             }
         }
 
-        public Category getOneCategory(int id)
+        public ActionResult<Category> getOneCategory(int id)
         {
             using (var db = new OnlineStoreContext(_optionsBuilder))
             {

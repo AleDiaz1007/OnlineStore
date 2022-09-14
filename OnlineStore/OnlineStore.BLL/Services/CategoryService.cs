@@ -27,7 +27,7 @@ namespace OnlineStore.BLL.Services
 
         }
 
-        public Category getOneCategory(int id)
+        public ActionResult<Category> getOneCategory(int id)
         {
             return _repository.getOneCategory(id);
         }

@@ -30,11 +30,16 @@ namespace OnlineStore.Controllers
 
         // Endpoint to get one specific category
         [HttpGet("/getCategory/{id}")]
-        public Category Get(int id)
+        public ActionResult<Category> getCategory(int id)
         {
-            Category result = _service.getOneCategory(id);
+            var category = _service.getOneCategory(id);
 
-            return result;
+            if(category == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(category);
         }
 
         // Endpoint to update a category
