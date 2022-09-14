@@ -21,7 +21,14 @@ namespace OnlineStore.Controllers
         [HttpGet ("/getProducts")]
         public ActionResult<IEnumerable<Product>> getProducts()
         {
-            return _service.getProducts();
+            var products = _service.getProducts();
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(products);
         }
 
         // Endpoint to get one specific product
@@ -51,5 +58,19 @@ namespace OnlineStore.Controllers
         {
             return _service.deleteProduct(id);
         }
+
+        //public IActionResult Update(string id, Contact contact)
+        //{
+        //    var contactToUpdate = _contacts.Get(id);
+
+        //    if (contactToUpdate == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _contacts.Update(contact);
+
+        //    return Ok();
+        //}
     }
 }

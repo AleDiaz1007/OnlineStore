@@ -18,7 +18,14 @@ namespace OnlineStore.Controllers
         [HttpGet("/getCategories")]
         public ActionResult<IEnumerable<Category>> getCategories()
         {
-            return _service.getCategories();
+            var categories = _service.getCategories();
+
+            if(categories == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(categories);
         }
 
         // Endpoint to get one specific category

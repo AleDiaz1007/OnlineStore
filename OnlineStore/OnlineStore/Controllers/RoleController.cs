@@ -19,7 +19,14 @@ namespace OnlineStore.Controllers
         [HttpGet ("/getRoles")]
         public ActionResult<IEnumerable<Role>> getRoles()
         {
-            return _service.getRoles();
+            var roles = _service.getRoles();
+
+            if(roles == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(roles);
         }
 
         // Endpoint to get a specific role

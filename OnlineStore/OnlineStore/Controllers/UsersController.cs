@@ -20,7 +20,14 @@ namespace OnlineStore.Controllers
         [HttpGet ("/getUsers")]
         public ActionResult<IEnumerable<Users>> getUsers()
         {
-            return _service.getUsers();
+            var users = _service.getUsers();
+
+            if(users == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
         }
 
         // Endpoint to get one specific user
