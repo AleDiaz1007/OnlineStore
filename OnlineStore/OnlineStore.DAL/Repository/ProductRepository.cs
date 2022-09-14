@@ -26,7 +26,7 @@ namespace OnlineStore.DAL.Repository
             {
                 List<Product> products = db.Product.Select(x => x).ToList();
 
-                if(products != null)
+                if(products.Any())
                 {
                     return products;
                 }

@@ -26,7 +26,7 @@ namespace OnlineStore.DAL.Repository
             {
                 List<Role> rolesList = db.Role.Select(x => x).ToList();
 
-                if(rolesList != null)
+                if(rolesList.Any())
                 {
                     return rolesList;
                 }

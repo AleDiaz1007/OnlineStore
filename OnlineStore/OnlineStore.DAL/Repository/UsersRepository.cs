@@ -26,7 +26,7 @@ namespace OnlineStore.DAL.Repository
             {
                 List<Users> usersList = db.Users.Select(x => x).ToList();
 
-                if (usersList != null)
+                if (usersList.Any())
                 {
 
                     return usersList ;
