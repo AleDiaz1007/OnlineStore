@@ -4,8 +4,9 @@ using OnlineStore.DAL.Models;
 
 namespace OnlineStore.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
+    [Route("api/category")]
     public class CategoryController : ControllerBase
     {
         readonly ICategoryService _service;
@@ -15,49 +16,56 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to get all categories
-        [HttpGet("/getCategories")]
+        [HttpGet]
         public ActionResult<IEnumerable<Category>> getCategories()
         {
             var categories = _service.getCategories();
 
             if(categories == null)
             {
-                return NotFound();
+                return NotFound("There's no categories stored");
             }
 
-            return Ok(categories);
+            return categories;
         }
 
         // Endpoint to get one specific category
-        [HttpGet("/getCategory/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<Category> getCategory(int id)
         {
             var category = _service.getOneCategory(id);
 
             if(category == null)
             {
-                return NotFound();
+                return NotFound("Selected category not found");
             }
 
-            return Ok(category);
+            return category;
         }
 
         // Endpoint to update a category
-        [HttpPut("/updateCategory/{id}")]
+        [HttpPut("update/{id}")]
         public ActionResult<Category> updateCategory(int id, Category category)
         {
-            return _service.updateCategory(id, category);
+            var updatedCategory = _service.updateCategory(id, category);
+
+            if(updatedCategory == null)
+            {
+                return NotFound("Selected category not found");
+            }
+
+            return updatedCategory;
         }
 
         // Endpoint to create a category
-        [HttpPost("/createCategory")]
+        [HttpPost("create")]
         public ActionResult<Category> createCategory(Category category)
         {
             return _service.createCategory(category);
         }
 
         // Endpoint to delete a category
-        [HttpDelete("/deleteCategory/{id}")]
+        [HttpDelete("delete/{id}")]
         public ActionResult<Category> deleteCategory(int id)
         {
             return _service.deleteCategory(id);
