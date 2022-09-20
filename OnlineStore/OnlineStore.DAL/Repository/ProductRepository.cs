@@ -84,8 +84,8 @@ namespace OnlineStore.DAL.Repository
                     selectedProduct.Price = product.Price;
                     selectedProduct.Quantity = product.Quantity;
                     selectedProduct.Description = product.Description;
-                    selectedProduct.UserID = product.UserID;
-                    selectedProduct.CategoryID = product.CategoryID;
+                    //selectedProduct.UserID = product.UserID;
+                    //selectedProduct.CategoryID = product.CategoryID;
 
                     db.SaveChanges();
 

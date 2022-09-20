@@ -5,7 +5,7 @@ using OnlineStore.DAL.Models;
 
 namespace OnlineStore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/product")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -18,59 +18,67 @@ namespace OnlineStore.Controllers
 
 
         // Endpoint to get all products
-        [HttpGet ("/getProducts")]
+        [HttpGet]
         public ActionResult<IEnumerable<Product>> getProducts()
         {
             var products = _service.getProducts();
 
             if (products == null)
             {
-                return NotFound();
+                return NotFound("There's no products stored");
             }
 
-            return Ok(products);
+            return products;
         }
 
         // Endpoint to get one specific product
-        [HttpGet ("/getProduct/{id}")]
+        [HttpGet ("{id}")]
         public ActionResult<Product> getProduct(int id)
         {
-            return _service.getProduct(id);
+            var selectedProduct = _service.getProduct(id);
+
+            if(selectedProduct == null)
+            {
+                return NotFound("Selected product not found");
+            }
+
+            return selectedProduct;
         }
 
         // Endpoitn to create a product
-        [HttpPost ("/createProduct")]
+        [HttpPost ("create")]
         public ActionResult<Product> createProduct(Product product)
         {
-            return _service.createProduct(product);
+            var createdProduct =  _service.createProduct(product);
+
+            if(createdProduct == null)
+            {
+                return NotFound("There was a problem with the product creation, " +
+                    "it could be the categoryID or userID");
+            }
+
+            return createdProduct;
         }
 
         // Endpoint to update a product
-        [HttpPut ("/updateProduct/{id}")]
+        [HttpPut ("update/{id}")]
         public ActionResult<Product> updateProduct(int id, Product product)
         {
-            return _service.updateProduct(id, product);
+            var updatedProduct = _service.updateProduct(id, product);
+
+            if(updatedProduct == null)
+            {
+                return NotFound("Selected product not found");
+            }
+
+            return updatedProduct;
         }
 
         // Endpoint to delete a product
-        [HttpDelete ("/deleteProduct/{id}")]
+        [HttpDelete ("delete/{id}")]
         public ActionResult<Product> deleteProduct(int id)
         {
             return _service.deleteProduct(id);
         }
-
-        //public IActionResult Update(string id, Contact contact)
-        //{
-        //    var contactToUpdate = _contacts.Get(id);
-
-        //    if (contactToUpdate == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _contacts.Update(contact);
-
-        //    return Ok();
-        //}
     }
 }
