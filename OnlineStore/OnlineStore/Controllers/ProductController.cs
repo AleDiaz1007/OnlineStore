@@ -61,7 +61,7 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to update a product
-        [HttpPut ("update/{id}")]
+        [HttpPut ("{id}/update")]
         public ActionResult<Product> updateProduct(int id, Product product)
         {
             var updatedProduct = _service.updateProduct(id, product);
@@ -75,7 +75,7 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to delete a product
-        [HttpDelete ("delete/{id}")]
+        [HttpDelete ("{id}/delete")]
         public ActionResult<Product> deleteProduct(int id)
         {
             return _service.deleteProduct(id);

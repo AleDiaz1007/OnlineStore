@@ -51,7 +51,7 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to update a role
-        [HttpPut ("update/{id}")]
+        [HttpPut ("{id}/update")]
         public ActionResult<Role> updateRole(int id, Role role)
         {
             var updatedRole = _service.updateRole(id, role);
@@ -65,7 +65,7 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to delete a role
-        [HttpDelete ("delete/{id}")]
+        [HttpDelete ("{id}/delete")]
         public ActionResult<Role> deleteRole(int id)
         {
             return _service.deleteRole(id);

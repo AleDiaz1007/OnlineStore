@@ -44,7 +44,7 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to update a category
-        [HttpPut("update/{id}")]
+        [HttpPut("{id}/update")]
         public ActionResult<Category> updateCategory(int id, Category category)
         {
             var updatedCategory = _service.updateCategory(id, category);
@@ -65,7 +65,7 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to delete a category
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}/delete")]
         public ActionResult<Category> deleteCategory(int id)
         {
             return _service.deleteCategory(id);
