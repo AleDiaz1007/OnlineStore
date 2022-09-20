@@ -4,7 +4,7 @@ using OnlineStore.DAL.Models;
 
 namespace OnlineStore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/role")]
     [ApiController]
     public class RoleController : ControllerBase
     {
@@ -16,42 +16,56 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to get all roles
-        [HttpGet ("/getRoles")]
+        [HttpGet]
         public ActionResult<IEnumerable<Role>> getRoles()
         {
             var roles = _service.getRoles();
 
             if(roles == null)
             {
-                return NotFound();
+                return NotFound("There's no roles stored");
             }
 
-            return Ok(roles);
+            return roles;
         }
 
         // Endpoint to get a specific role
-        [HttpGet ("/getRole/{id}")]
+        [HttpGet ("{id}")]
         public ActionResult<Role> getRole(int id)
         {
-            return _service.getRole(id);
+            var selectedRole = _service.getRole(id);
+
+            if(selectedRole == null)
+            {
+                return NotFound("Selected role not found");
+            }
+
+            return selectedRole;
         }
 
         // Endpoint to create a role
-        [HttpPost ("/createRole")]
+        [HttpPost ("create")]
         public ActionResult<Role> createRole(Role role)
         {
             return _service.createRole(role);
         }
 
         // Endpoint to update a role
-        [HttpPut ("/updateRole/{id}")]
+        [HttpPut ("update/{id}")]
         public ActionResult<Role> updateRole(int id, Role role)
         {
-            return _service.updateRole(id, role);
+            var updatedRole = _service.updateRole(id, role);
+
+            if(updatedRole == null)
+            {
+                return NotFound("Selected role not found");
+            }
+
+            return updatedRole;
         }
 
         // Endpoint to delete a role
-        [HttpDelete ("/deleteRole/{id}")]
+        [HttpDelete ("delete/{id}")]
         public ActionResult<Role> deleteRole(int id)
         {
             return _service.deleteRole(id);

@@ -80,7 +80,7 @@ namespace OnlineStore.DAL.Repository
 
                     db.SaveChanges();
 
-                    return role;
+                    return query;
                 }
 
                 return null;
