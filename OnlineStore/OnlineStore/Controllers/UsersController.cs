@@ -5,7 +5,7 @@ using OnlineStore.DAL.Models;
 
 namespace OnlineStore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -17,42 +17,64 @@ namespace OnlineStore.Controllers
         }
 
         // Endpoint to get all users
-        [HttpGet ("/getUsers")]
+        [HttpGet]
         public ActionResult<IEnumerable<Users>> getUsers()
         {
             var users = _service.getUsers();
 
             if(users == null)
             {
-                return NotFound();
+                return NotFound("There's no users stored");
             }
 
-            return Ok(users);
+            return users;
         }
 
         // Endpoint to get one specific user
-        [HttpGet ("/getUser/{id}")]
+        [HttpGet ("{id}")]
         public ActionResult<Users> getUser(int id)
         {
-            return _service.getUser(id);
+            var selectedUser = _service.getUser(id);
+
+            if(selectedUser == null)
+            {
+                return NotFound("Selected user not found");
+            }
+
+            return selectedUser;
         }
 
         // Endpoint to create a user
-        [HttpPost ("/createUser")]
+        [HttpPost ("create")]
         public ActionResult<Users> createUser(Users user)
         {
-            return _service.createUser(user);
+            var createdUser = _service.createUser(user);
+
+            if(createdUser == null)
+            {
+                return NotFound("There's an error with user creation, " +
+                    "it could be the idRole");
+            }
+
+            return createdUser;
         }
 
         // Endpoint to update a user
-        [HttpPut ("/updateUser/{id}")]
+        [HttpPut ("{id}/update")]
         public ActionResult<Users> updateUser(int id, Users user)
         {
-            return _service.updateUser(id, user);   
+            var updatedUser = _service.updateUser(id, user);   
+
+            if(updatedUser == null)
+            {
+                return NotFound("Selected user not found or the idRole is not valid");
+            }
+
+            return updatedUser;
         }
 
         // Endpoint to delete a user
-        [HttpDelete ("/deleteUser/{id}")]
+        [HttpDelete ("{id}/delete")]
         public ActionResult<Users> deleteUser(int id)
         {
             return _service.deleteUser(id);
